@@ -12,7 +12,7 @@ public class PlayerWallJumpState : PlayerState
     {
         base.Enter();
 
-        stateTimer = 1f;
+        stateTimer = 0.3f;
         player.SetVelocity(5 * -player.facingDir, player.jumpForce);
     }
 
@@ -30,5 +30,8 @@ public class PlayerWallJumpState : PlayerState
 
         if (player.IsGroundDetected())
             stateMachine.ChangeState(player.idleState);
+
+
+     
     }
 }
