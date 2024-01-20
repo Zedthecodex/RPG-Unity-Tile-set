@@ -8757,6 +8757,7 @@ GameObject:
   - component: {fileID: 1195560129}
   - component: {fileID: 1195560132}
   - component: {fileID: 1195560131}
+  - component: {fileID: 1195560133}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -8776,6 +8777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7411ddc83aa11924c88728831d04b5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackDirection: {x: 0, y: 0}
+  knockbackDuration: 0
   attackCheck: {fileID: 563922963}
   attackCheckRadius: 0.8
   groundCheck: {fileID: 295805108}
@@ -8875,6 +8878,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.06784159, y: -0.27535737}
   m_Size: {x: 0.79531085, y: 2.093448}
   m_Direction: 0
+--- !u!114 &1195560133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195560128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf796c5b88b9946469c7caa5370bc137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.25
+  hitMat: {fileID: 2100000, guid: 27da79454ace87c4980b7f28d5765099, type: 2}
 --- !u!1 &1281848397
 GameObject:
   m_ObjectHideFlags: 3
@@ -9159,6 +9176,7 @@ GameObject:
   - component: {fileID: 1494907819}
   - component: {fileID: 1494907821}
   - component: {fileID: 1494907820}
+  - component: {fileID: 1494907822}
   m_Layer: 7
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
@@ -9197,6 +9215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8d51d93ab27fe41a26bc291980c52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackDirection: {x: 8, y: 12}
+  knockbackDuration: 0.07
   attackCheck: {fileID: 913712722}
   attackCheckRadius: 0.8
   groundCheck: {fileID: 461126066}
@@ -9230,7 +9250,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 12
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -9287,6 +9307,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0477867, y: 1.5213401}
   m_EdgeRadius: 0
+--- !u!114 &1494907822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494907817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf796c5b88b9946469c7caa5370bc137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.2
+  hitMat: {fileID: 2100000, guid: 27da79454ace87c4980b7f28d5765099, type: 2}
 --- !u!1 &1561460938
 GameObject:
   m_ObjectHideFlags: 0
