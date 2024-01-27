@@ -12,21 +12,33 @@ public class PlayerAimSwordState : PlayerState
     {
         base.Enter();
 
+        //player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+
         player.skill.sword.DotsActive(true);
     }
     public override void Update()
     {
         base.Update();
 
+        player.SetZeroVelocity();
         if (Input.GetKeyUp(KeyCode.Mouse1))
             stateMachine.ChangeState(player.idleState);
+
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (player.transform.position.x > mousePosition.x && player.facingDir == 1)
+            player.Flip();
+        else if (player.transform.position.x < mousePosition.x && player.facingDir ==-1)
+            player.Flip();
     }
 
     public override void Exit()
     {
         base.Exit();
+       // player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        player.StartCoroutine("BusyFor", .2f);
 
-     
+
     }
 
 
