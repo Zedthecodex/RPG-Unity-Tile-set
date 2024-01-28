@@ -34,22 +34,22 @@ public class Clone_Skill_Controller : MonoBehaviour
         }
 
     }
-    public void SetupClone(Transform _newTransform, float _cloneDuration,bool _canAttack, Vector3 _offset,Transform _closestEnemy, bool _canDuplicate,float _chanceToDuplicate)
+    public void SetupClone(Transform _newTransform, float _cloneDuration, bool _canAttack, Vector3 _offset, Transform _closestEnemy, bool _canDuplicate, float _chanceToDuplicate)
     {
         if (_canAttack)
             anim.SetInteger("AttackNumber", Random.Range(1, 3));
+
+
         transform.position = _newTransform.position + _offset;
         cloneTimer = _cloneDuration;
-
 
         canDuplicateClone = _canDuplicate;
         chanceToDuplicate = _chanceToDuplicate;
         closestEnemy = _closestEnemy;
         FaceClosestTarget();
+
     }
-
-
-    private void AnimationTrigger()
+        private void AnimationTrigger()
     {
         cloneTimer = -.1f;
     }
@@ -61,13 +61,17 @@ public class Clone_Skill_Controller : MonoBehaviour
         foreach (var hit in colliders)
         {
             if (hit.GetComponent<Enemy>() != null)
+            {
+
+
                 hit.GetComponent<Enemy>().Damage();
 
-            if(canDuplicateClone)
-            {
-                if(Random.Range(0,100) < chanceToDuplicate)
+                if (canDuplicateClone)
                 {
-                    SkillManager.instance.clone.CreateClone(hit.transform, new Vector3(.5f * facingDir, 0));
+                    if (Random.Range(0, 100) < chanceToDuplicate)
+                    {
+                        SkillManager.instance.clone.CreateClone(hit.transform, new Vector3(.5f * facingDir, 0));
+                    }
                 }
             }
         }

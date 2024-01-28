@@ -16,7 +16,6 @@ public class Clone_Skill : Skill
     [SerializeField] private bool canDuplicateClone;
 
     [Header("Clone can duplicate")]
-    [SerializeField] private bool canDuplicateChance;
     [SerializeField] private float chanceToDuplicate;
 
     [Header("Crystal instead of clone")]
