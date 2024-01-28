@@ -11205,6 +11205,7 @@ MonoBehaviour:
   canDuplicateClone: 1
   canDuplicateChance: 0
   chanceToDuplicate: 0
+  crystalInsteadOfClone: 1
 --- !u!114 &1725717270
 MonoBehaviour:
   m_ObjectHideFlags: 0

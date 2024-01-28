@@ -99,7 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5595c83009c7607428ff440446525a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growSpeed: 5
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!95 &1641017418598288094
 Animator:
   serializedVersion: 5
