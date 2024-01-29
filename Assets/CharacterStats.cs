@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    #region Components
     private EntityFX fx;
 
     [Header("Major Stats")]
@@ -39,13 +40,15 @@ public class CharacterStats : MonoBehaviour
     private float igniteDamageCooldown = .3f;
     private float igniteDamageTimer;
     private int igniteDamage;
-
+    [SerializeField] private GameObject shockStrikePrefab; 
+    private int shockDamage;
 
 
     public int currentHealth;
 
     public System.Action onHealthChanged;
 
+    #endregion
     protected virtual void Start()
     {
         critPower.SetDefaultValue(150);
@@ -150,16 +153,20 @@ public class CharacterStats : MonoBehaviour
         if (canApplyIgnite)
             _targetStats.SetupIgniteDamage(Mathf.RoundToInt(_fireDamage * .2f));
 
+        if (canApplyShock)
+            _targetStats.SetupShockStrikeDamage(Mathf.RoundToInt(_lightningDamage * .1f));
+
         _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
     }
 
 
     public void ApplyAilments(bool _ignite, bool _chill, bool _shock)
     {
-        if (isIgnited || isChilled || isShocked)
-            return;
+        bool canApplyIgnite = !isIgnited && !isChilled && !isShocked;
+        bool canApplyChill = !isIgnited && !isChilled && !isShocked;
+        bool canApplyShock = !isIgnited && !isChilled;
 
-        if(_ignite)
+        if (_ignite && canApplyIgnite)
         {
             isIgnited = _ignite;
             ignitedTimer = ailmentsDuration;
@@ -167,26 +174,84 @@ public class CharacterStats : MonoBehaviour
             fx.IgniteFxFor(ailmentsDuration);
         }
 
-        if(_chill)
+        if(_chill && canApplyChill)
         {
             chilledTimer = ailmentsDuration;
             isChilled = _chill;
+
+            float slowPercentage = .2f;
+            GetComponent<Entity>().SlowEntityBy(slowPercentage, ailmentsDuration);
             fx.ChillFxFor(ailmentsDuration);
         }
 
-        if(_shock)
+        if (_shock && canApplyShock)
         {
-            shockedTimer = ailmentsDuration;
-            isShocked = _shock;
-            fx.ShockFxFor(ailmentsDuration);
+            if(!isShocked)
+            {
+                ApplyShock(_shock);
+
+            }
+            else
+            {
+
+                if (GetComponent<Player>() != null)
+                    return;
+                HitNearestTargetWithShockStrike();
+            }
+
+
+
+            //find closest target, only among the enemies ,instantiate thunder strikes and set it up
         }
 
  
     }
 
+    public void ApplyShock(bool _shock)
+    {
+        if (isShocked)
+            return;
 
+        shockedTimer = ailmentsDuration;
+        isShocked = _shock;
+        fx.ShockFxFor(ailmentsDuration);
+    }
+
+    private void HitNearestTargetWithShockStrike()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
+
+        float closestDistance = Mathf.Infinity;
+        Transform closestEnemy = null;
+
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<Enemy>() != null && Vector2.Distance(transform.position, hit.transform.position) > 1)
+            {
+                float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
+
+                if (distanceToEnemy < closestDistance)
+                {
+                    closestDistance = distanceToEnemy;
+                    closestEnemy = hit.transform;
+                }
+            }
+
+            if (closestEnemy == null)
+                closestEnemy = transform;
+
+        }
+        if (closestEnemy != null)
+        {
+            GameObject newShockStrike = Instantiate(shockStrikePrefab, transform.position, Quaternion.identity);
+
+            newShockStrike.GetComponent<ShockStrike_Controller>().Setup(shockDamage, closestEnemy.GetComponent<CharacterStats>());
+        }
+    }
 
     public void SetupIgniteDamage(int _damage) => igniteDamage = _damage;
+
+    public void SetupShockStrikeDamage(int _damage) => shockDamage = _damage;
 
     public virtual void TakeDamage(int _damage)
     {

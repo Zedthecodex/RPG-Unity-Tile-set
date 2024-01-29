@@ -397,6 +397,7 @@ MonoBehaviour:
   isChilled: 0
   isShocked: 0
   ailmentsDuration: 4
+  shockStrikePrefab: {fileID: 993352668065922697, guid: 3bad49a8bfc5ed249ac4df432f500eb3, type: 3}
   currentHealth: 0
 --- !u!70 &39736544
 CapsuleCollider2D:
@@ -10031,6 +10032,7 @@ MonoBehaviour:
   isChilled: 0
   isShocked: 0
   ailmentsDuration: 4
+  shockStrikePrefab: {fileID: 993352668065922697, guid: 3bad49a8bfc5ed249ac4df432f500eb3, type: 3}
   currentHealth: 0
 --- !u!1 &1281848397
 GameObject:
