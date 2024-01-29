@@ -1,7 +1,9 @@
+using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    private EntityFX fx;
 
     [Header("Major Stats")]
     public Stat strength; // 1 point in damage and crit power 1%
@@ -25,17 +27,62 @@ public class CharacterStats : MonoBehaviour
     public Stat iceDamage;
     public Stat lightningDamage;
 
-    public bool isIgnited;
-    public bool isChilled;
-    public bool isShocked;
+    public bool isIgnited; // does damage over time
+    public bool isChilled; // reduce armor by 20%
+    public bool isShocked; // reduce accuracy by 20%
+
+    [SerializeField] private float ailmentsDuration = 4;
+    private float ignitedTimer;
+    private float chilledTimer;
+    private float shockedTimer;
+
+    private float igniteDamageCooldown = .3f;
+    private float igniteDamageTimer;
+    private int igniteDamage;
 
 
-    [SerializeField] private int currentHealth;
+
+    public int currentHealth;
+
+    public System.Action onHealthChanged;
+
     protected virtual void Start()
     {
         critPower.SetDefaultValue(150);
-        currentHealth = maxHealth.GetValue();
+        currentHealth = GetMaxHealthValue();
 
+        fx = GetComponent<EntityFX>();
+    
+    }
+
+    protected virtual void Update()
+    {
+        ignitedTimer -= Time.deltaTime;
+        chilledTimer -= Time.deltaTime;
+        shockedTimer -= Time.deltaTime;
+
+
+        igniteDamageTimer -= Time.deltaTime;
+
+        if (ignitedTimer < 0)
+            isIgnited = false;
+
+        if (chilledTimer < 0)
+            isChilled = false;
+
+        if (shockedTimer < 0)
+            isShocked = false;
+        if(igniteDamageTimer < 0 && isIgnited)
+        {
+            Debug.Log("Take burn Damage" + igniteDamage);
+
+            DecreaseHealthBy(igniteDamage);
+
+            if (currentHealth < 0)
+                Die();
+
+            igniteDamageTimer = igniteDamageCooldown;
+        }
     }
 
     public virtual void DoDamage(CharacterStats _targetStats)
@@ -68,6 +115,42 @@ public class CharacterStats : MonoBehaviour
         totalMagicalDamage = CheckTargetResistance(_targetStats, totalMagicalDamage);
 
         _targetStats.TakeDamage(totalMagicalDamage);
+
+        if (Mathf.Max(_fireDamage, _iceDamage, _lightningDamage) <= 0)
+            return;
+
+        bool canApplyIgnite = _fireDamage > _iceDamage && _fireDamage > _lightningDamage;
+        bool canApplyChill = _iceDamage > _fireDamage && _iceDamage > _lightningDamage;
+        bool canApplyShock = _lightningDamage > _fireDamage && _lightningDamage > _iceDamage;
+
+        while(!canApplyShock && !canApplyIgnite && !canApplyChill)
+        {
+            if(Random.value < .5f && _fireDamage > 0)
+            {
+                canApplyIgnite = true;
+                _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+                return;
+            }
+
+            if (Random.value < .5f && _iceDamage > 0)
+            {
+                canApplyChill = true;
+                _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+                return;
+            }
+
+            if(Random.value < .5f && _lightningDamage >0)
+            {
+                canApplyShock = true;
+                _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+                return;
+            }
+        }
+
+        if (canApplyIgnite)
+            _targetStats.SetupIgniteDamage(Mathf.RoundToInt(_fireDamage * .2f));
+
+        _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
     }
 
 
@@ -76,21 +159,54 @@ public class CharacterStats : MonoBehaviour
         if (isIgnited || isChilled || isShocked)
             return;
 
-        isIgnited = _ignite;
-        isChilled = _chill;
-        isShocked = _shock;
+        if(_ignite)
+        {
+            isIgnited = _ignite;
+            ignitedTimer = ailmentsDuration;
+
+            fx.IgniteFxFor(ailmentsDuration);
+        }
+
+        if(_chill)
+        {
+            chilledTimer = ailmentsDuration;
+            isChilled = _chill;
+            fx.ChillFxFor(ailmentsDuration);
+        }
+
+        if(_shock)
+        {
+            shockedTimer = ailmentsDuration;
+            isShocked = _shock;
+            fx.ShockFxFor(ailmentsDuration);
+        }
+
+ 
     }
+
+
+
+    public void SetupIgniteDamage(int _damage) => igniteDamage = _damage;
 
     public virtual void TakeDamage(int _damage)
     {
-        currentHealth -= _damage;
+        DecreaseHealthBy(_damage);
 
         if (currentHealth <= 0)
         {
             Die();
         }
+
     }
 
+
+    protected virtual void DecreaseHealthBy(int _damage)
+    {
+        currentHealth -= _damage;
+
+        if (onHealthChanged != null)
+            onHealthChanged();
+    }
     public virtual void Die()
     {
         //throw new NotImplementedException();
@@ -98,6 +214,9 @@ public class CharacterStats : MonoBehaviour
     private bool TargetCanAvoidAttack(CharacterStats _targetStats)
     {
         int totalEvasion = _targetStats.evasion.GetValue() + _targetStats.agility.GetValue();
+
+        if (_targetStats.isShocked)
+            totalEvasion += 20;
         if (Random.Range(0, 100) < totalEvasion)
         {
             Debug.Log("Attack avoided");
@@ -107,7 +226,12 @@ public class CharacterStats : MonoBehaviour
     }
     private int CheckTargetArmor(CharacterStats _targetStats, int totalDamage)
     {
-        totalDamage -= _targetStats.armor.GetValue();
+
+        if(_targetStats.isChilled)
+            totalDamage -= Mathf.RoundToInt(_targetStats.armor.GetValue() * .8f);
+        else
+            totalDamage -= _targetStats.armor.GetValue();
+
         totalDamage = Mathf.Clamp(totalDamage, 0, int.MaxValue);
         return totalDamage;
     }
@@ -137,5 +261,10 @@ public class CharacterStats : MonoBehaviour
         float critDamage = _damage * totalCritPower;
 
         return Mathf.RoundToInt(critDamage);
+    }
+
+    public int GetMaxHealthValue()
+    {
+        return maxHealth.GetValue() + vitality.GetValue() * 5;
     }
 }
