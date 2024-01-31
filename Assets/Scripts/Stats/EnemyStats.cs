@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyStats : CharacterStats
 {
     private Enemy enemy;
+    private ItemDrop myDropSystem;
     // Start is called before the first frame update
 
     [Header("Level Details")]
@@ -16,11 +17,12 @@ public class EnemyStats : CharacterStats
 
     protected override void Start()
     {
-        ApplyLevelModifiers();
         base.Start();
 
         enemy = GetComponent<Enemy>();
+        myDropSystem = GetComponent<ItemDrop>();
 
+        ApplyLevelModifiers();
     }
 
     private void ApplyLevelModifiers()
@@ -65,5 +67,7 @@ public class EnemyStats : CharacterStats
     {
         base.Die();
         enemy.Die();
+
+        myDropSystem.GenerateDrop();
     }
 }
