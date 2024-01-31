@@ -434,8 +434,8 @@ Transform:
   m_GameObject: {fileID: 39736537}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -786.18787, y: -636.10187, z: 0}
-  m_LocalScale: {x: 3.6544652, y: 3.6544652, z: 3.6544652}
+  m_LocalPosition: {x: 61.830048, y: 2.9261932, z: 0}
+  m_LocalScale: {x: 1.2999998, y: 1.2999998, z: 1.2999998}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 227136873}
@@ -444,7 +444,7 @@ Transform:
   - {fileID: 1382081015}
   - {fileID: 2101414300}
   - {fileID: 1533373362}
-  m_Father: {fileID: 104089846}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &39736543
 MonoBehaviour:
@@ -563,7 +563,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1e41c075efec1b74c858bbf85627f8d2, type: 2}
   - {fileID: 11400000, guid: b6a54aae050c94a4eb6c90a8f03f3f03, type: 2}
   dropPrefab: {fileID: 2774776264787051707, guid: 5f62b661662505f428679bc874a34b8a, type: 3}
-  item: {fileID: 11400000, guid: df71ff67112667c47908a6d5c913d8ea, type: 2}
 --- !u!1001 &77847561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1014,8 +1013,6 @@ RectTransform:
   - {fileID: 1498902542}
   - {fileID: 1070973420}
   - {fileID: 263879430}
-  - {fileID: 39736542}
-  - {fileID: 218089468}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4833,8 +4830,8 @@ Transform:
   m_GameObject: {fileID: 218089467}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -775.73, y: -636.10187, z: 0}
-  m_LocalScale: {x: 3.6544652, y: 3.6544652, z: 3.6544652}
+  m_LocalPosition: {x: 65.55023, y: 2.9617767, z: 0}
+  m_LocalScale: {x: 1.2999998, y: 1.2999998, z: 1.2999998}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2043220063}
@@ -4843,7 +4840,7 @@ Transform:
   - {fileID: 1941660966}
   - {fileID: 1561166926}
   - {fileID: 945747704}
-  m_Father: {fileID: 104089846}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &218089469
 MonoBehaviour:
@@ -4865,7 +4862,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1e41c075efec1b74c858bbf85627f8d2, type: 2}
   - {fileID: 11400000, guid: b6a54aae050c94a4eb6c90a8f03f3f03, type: 2}
   dropPrefab: {fileID: 2774776264787051707, guid: 5f62b661662505f428679bc874a34b8a, type: 3}
-  item: {fileID: 11400000, guid: df71ff67112667c47908a6d5c913d8ea, type: 2}
 --- !u!70 &218089470
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5498,6 +5494,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4222bd2903ee2104ea9615da4dc2bdff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingItems:
+  - {fileID: 11400000, guid: 002d9ac7271dcda42b6026bb3778b186, type: 2}
+  - {fileID: 11400000, guid: 002d9ac7271dcda42b6026bb3778b186, type: 2}
+  - {fileID: 11400000, guid: df71ff67112667c47908a6d5c913d8ea, type: 2}
+  - {fileID: 11400000, guid: 440b6cab8afb78246836d83f2f696b31, type: 2}
+  - {fileID: 11400000, guid: b6a54aae050c94a4eb6c90a8f03f3f03, type: 2}
   equipment: []
   inventory: []
   stash: []
@@ -12932,6 +12934,7 @@ GameObject:
   - component: {fileID: 1195560131}
   - component: {fileID: 1195560133}
   - component: {fileID: 1195560134}
+  - component: {fileID: 1195560135}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -13112,7 +13115,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   maxHealth:
-    baseValue: 50
+    baseValue: 10
     modifiers: 
   armor:
     baseValue: 0
@@ -13138,6 +13141,23 @@ MonoBehaviour:
   ailmentsDuration: 4
   shockStrikePrefab: {fileID: 993352668065922697, guid: 3bad49a8bfc5ed249ac4df432f500eb3, type: 3}
   currentHealth: 0
+--- !u!114 &1195560135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195560128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41da544fbdbf6e245a2d0db06e23144f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleItemDrop: 0
+  possibleDrop: []
+  dropPrefab: {fileID: 2774776264787051707, guid: 5f62b661662505f428679bc874a34b8a, type: 3}
+  chanceToLoseItems: 20
+  chanceToLoseMaterials: 75
 --- !u!224 &1226545485 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3319231544293731348, guid: c91d499996a3df8418c1d9b4cdb9b966, type: 3}
@@ -16724,4 +16744,6 @@ SceneRoots:
   - {fileID: 6756766627538607408}
   - {fileID: 641819915}
   - {fileID: 353492732}
+  - {fileID: 39736542}
+  - {fileID: 218089468}
   - {fileID: 104089846}
