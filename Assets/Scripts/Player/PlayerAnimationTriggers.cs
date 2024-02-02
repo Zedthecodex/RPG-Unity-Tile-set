@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class PlayerAnimationTriggers : MonoBehaviour
@@ -25,12 +26,20 @@ public class PlayerAnimationTriggers : MonoBehaviour
                 // hit.GetComponent<Enemy>().Damage();
                 // hit.GetComponent<CharacterStats>().TakeDamage(player.stats.damage.GetValue());
 
-                Inventory.instance.GetEquipment(EquipmentType.Weapon).ExecuteItemEffect();
+                ItemData_Equipment weaponData = Inventory.instance.GetEquipment(EquipmentType.Weapon);
 
+                if (weaponData != null)
+                    weaponData.Effect(_target.transform);
             }
         }
 
                
+    }
+
+
+    private void WeaponEffect()
+    {
+     
     }
 
     private void ThrowSword()
