@@ -5501,6 +5501,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 440b6cab8afb78246836d83f2f696b31, type: 2}
   - {fileID: 11400000, guid: b6a54aae050c94a4eb6c90a8f03f3f03, type: 2}
   - {fileID: 11400000, guid: c52a35d59ded5204a82cdd52ed0ab3cf, type: 2}
+  - {fileID: 11400000, guid: ce3cc6307477dc845a28b101881fce2b, type: 2}
+  - {fileID: 11400000, guid: 109eda73841b6f74bb04db3c04b56036, type: 2}
+  - {fileID: 11400000, guid: a3ec660df629bfb4ea4040d4bb182fe1, type: 2}
   equipment: []
   inventory: []
   stash: []
@@ -11526,67 +11529,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3319231544293731348, guid: c91d499996a3df8418c1d9b4cdb9b966, type: 3}
   m_PrefabInstance: {fileID: 1103794924}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &714188280
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5601592558839685651, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688386203670399582, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 62.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688386203670399582, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688386203670399582, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688386203670399582, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688386203670399582, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688386203670399582, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688386203670399582, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688386203670399582, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688386203670399582, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688386203670399582, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8485675164615848083, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
-      propertyPath: m_Name
-      value: ThunderStrike
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5134bcf707ceef648a9c7a8f82c83685, type: 3}
 --- !u!1 &717928440
 GameObject:
   m_ObjectHideFlags: 0
@@ -16809,4 +16751,3 @@ SceneRoots:
   - {fileID: 39736542}
   - {fileID: 218089468}
   - {fileID: 104089846}
-  - {fileID: 714188280}

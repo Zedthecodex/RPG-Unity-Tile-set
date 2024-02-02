@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa144c19a894e6247ba9c4150024f9c9, type: 3}
-  m_Name: Thunder_Claw
+  m_Name: Amulet of Zeus
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Thunder_Claw
-  icon: {fileID: -1331556987, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
-  dropChance: 0
-  equipmentType: 0
+  itemName: Amulet of Zeus
+  icon: {fileID: -245851270, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  dropChance: 15.4
+  equipmentType: 2
   itemEffects:
   - {fileID: 11400000, guid: 1933ff72a0e8b1d42bbb827e67c241e7, type: 2}
   strength: 0
   agility: 0
   intelligence: 0
   vitality: 0
-  damage: 12
+  damage: 0
   critChance: 0
   critPower: 0
-  maxHealth: 0
+  maxHealth: 20
   armor: 0
   evasion: 0
-  magicResistance: 0
+  magicResistance: 15
   fireDamage: 0
   iceDamage: 0
-  lightningDamage: 7
+  lightningDamage: 5
   craftingMaterials: []
