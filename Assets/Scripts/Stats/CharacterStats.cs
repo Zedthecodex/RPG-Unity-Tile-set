@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
@@ -81,7 +82,21 @@ public class CharacterStats : MonoBehaviour
         if(isIgnited)
             ApplyIgniteDamage();
     }
+    
+    public virtual void IncreaseStatsBy(int _modifier,float _duration, Stat _statToModify)
+    {
 
+        StartCoroutine(StatModCoroutine(_modifier,_duration, _statToModify));
+    }
+
+    private IEnumerator StatModCoroutine(int _modifier, float _duration, Stat _statToModify)
+    {
+        _statToModify.AddModifier(_modifier);
+
+        yield return new WaitForSeconds(_duration);
+
+        _statToModify.RemoveModifier(_modifier);
+    }
   
 
     public virtual void DoDamage(CharacterStats _targetStats)
@@ -100,7 +115,8 @@ public class CharacterStats : MonoBehaviour
 
         totalDamage = CheckTargetArmor(_targetStats, totalDamage);
         _targetStats.TakeDamage(totalDamage);
-        //DoMagicalDamage(_targetStats);
+        
+        DoMagicalDamage(_targetStats); // remove if do not want to apply magic hit on primary attack
     }
 
     #region Magical Damage and Ailments
