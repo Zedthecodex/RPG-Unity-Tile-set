@@ -109,11 +109,12 @@ public class Inventory : MonoBehaviour
     {
         if (equipmentDictionary.TryGetValue(itemToRemove, out InventoryItem value))
         {
-          
+
             equipment.Remove(value);
             equipmentDictionary.Remove(itemToRemove);
             itemToRemove.RemoveModifiers();
         }
+        
     }
 
     private void UpdateSlotUI()
@@ -226,7 +227,7 @@ public class Inventory : MonoBehaviour
     {
         if (inventory.Count >= inventoryItemSlot.Length)
         {
-            Debug.Log(" No more Space");
+            //Debug.Log(" No more Space");
             return false;
 
         }
