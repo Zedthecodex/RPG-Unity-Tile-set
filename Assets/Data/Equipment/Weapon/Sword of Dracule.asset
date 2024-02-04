@@ -20,6 +20,8 @@ MonoBehaviour:
   itemCooldown: 0
   itemEffects:
   - {fileID: 11400000, guid: ff03c27dcfb5ac949b172306d91b5576, type: 2}
+  itemEffectDescription: 'Unique : Suck Life force out of enemies ( 10% of max hp
+    ).'
   strength: 0
   agility: 0
   intelligence: 0

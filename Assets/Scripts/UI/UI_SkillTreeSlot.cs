@@ -81,7 +81,7 @@ public class UI_SkillTreeSlot : MonoBehaviour , IPointerEnterHandler,IPointerExi
         else
             yOffset = 150;
 
-        ui.skillToolTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + 100);
+        ui.skillToolTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
     }
 
     public void OnPointerExit(PointerEventData eventData)

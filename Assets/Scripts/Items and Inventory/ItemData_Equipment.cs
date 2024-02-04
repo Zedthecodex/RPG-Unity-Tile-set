@@ -16,9 +16,11 @@ public enum EquipmentType
 public class ItemData_Equipment : ItemData
 {
     public EquipmentType equipmentType;
-
+    [Header("Unique effect")]
     public float itemCooldown;
     public ItemEffect[] itemEffects;
+    [TextArea]
+    public string itemEffectDescription;
 
     [Header("Major Stats")]
     public int strength; // 1 point in damage and crit power 1%
@@ -132,6 +134,12 @@ public class ItemData_Equipment : ItemData
                 sb.AppendLine();
                 sb.Append("");
             }
+        }
+
+        if(itemEffectDescription.Length > 0)
+        {
+            sb.AppendLine();
+            sb.AppendLine(itemEffectDescription);
         }
 
         return sb.ToString();
