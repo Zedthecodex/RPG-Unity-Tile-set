@@ -10,32 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa144c19a894e6247ba9c4150024f9c9, type: 3}
-  m_Name: Sword of Dracule
+  m_Name: Book of the nile
   m_EditorClassIdentifier: 
-  itemType: 1
-  itemName: Sword of Dracule
-  icon: {fileID: -1944902997, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
-  dropChance: 4.7
+  itemType: 0
+  itemName: 
+  icon: {fileID: -1985898824, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  dropChance: 0
   equipmentType: 0
   itemCooldown: 0
-  itemEffects:
-  - {fileID: 11400000, guid: ff03c27dcfb5ac949b172306d91b5576, type: 2}
+  itemEffects: []
   strength: 0
   agility: 0
-  intelligence: 0
+  intelligence: 10
   vitality: 0
-  damage: 4
-  critChance: 15
+  damage: 0
+  critChance: 0
   critPower: 0
   maxHealth: 0
   armor: 0
   evasion: 0
   magicResistance: 0
   fireDamage: 0
-  iceDamage: 0
+  iceDamage: 20
   lightningDamage: 0
   craftingMaterials:
-  - data: {fileID: 11400000, guid: df71ff67112667c47908a6d5c913d8ea, type: 2}
-    stackSize: 1
   - data: {fileID: 11400000, guid: 002d9ac7271dcda42b6026bb3778b186, type: 2}
-    stackSize: 1
+    stackSize: 3
