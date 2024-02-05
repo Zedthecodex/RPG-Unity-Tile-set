@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,7 +8,9 @@ using UnityEngine.UI;
 public class UI_SkillTreeSlot : MonoBehaviour , IPointerEnterHandler,IPointerExitHandler
 {
     private UI ui;
+    private Image skillImage;
 
+    [SerializeField] private int skillPrice;
     [SerializeField] private string skillName;
     [TextArea]
     [SerializeField] private string skillDescription;
@@ -19,11 +22,17 @@ public class UI_SkillTreeSlot : MonoBehaviour , IPointerEnterHandler,IPointerExi
     [SerializeField] private UI_SkillTreeSlot[] shouldBeUnlocked;
     [SerializeField] private UI_SkillTreeSlot[] shouldBeLocked;
 
-    private Image skillImage;
+  
+
 
     private void OnValidate()
     {
         gameObject.name = "SkillTreeSlot_UI - " + skillName;   
+    }
+    private void Awake()
+    {
+        GetComponent<Button>().onClick.AddListener(() => UnlockSkillSlot());
+        
     }
     private void Start()
     {
@@ -33,11 +42,12 @@ public class UI_SkillTreeSlot : MonoBehaviour , IPointerEnterHandler,IPointerExi
 
         skillImage.color = lockedSkillColor;
 
-        GetComponent<Button>().onClick.AddListener(() => UnlockSkillSlot());
     }
 
     public void UnlockSkillSlot()
     {
+        if (PlayerManager.instance.HaveEnoughMoney(skillPrice) == false)
+            return;
         for(int i = 0; i< shouldBeUnlocked.Length; i++)
         {
             if (shouldBeUnlocked[i].unlocked == false)
